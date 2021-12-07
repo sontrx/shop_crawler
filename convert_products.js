@@ -90,19 +90,20 @@ async function convertProducts(source_link) {
         product.image_gallery.forEach((image, index) => {
             converted_products.push({
                 handle: product.link.split('/').slice(-2)[0],
-                title: product.title,
-                body: product.long_description,
-                vendor: 'Imported',
-                published: true,
-                price: product.price.slice(0, -1),
+                title: index === 0 ? product.title : '',
+                body: index === 0 ? product.long_description : '',
+                vendor: index === 0 ? 'Imported' : '',
+                published: index === 0 ? true : '',
+                price: index === 0 ? product.price.slice(0, -1) : '',
                 image: image,
                 image_position: index + 1,
-                required_shipping: false,
-                taxable: false,
-                gift_card: false,
-                status: 'active',
-                inventory_policy: 'deny',
-                fulfillment_service: 'manual',
+                required_shipping: index === 0 ? false : '',
+                taxable: index === 0 ? false : '',
+                gift_card: index === 0 ? false : '',
+                status: index === 0 ? 'active' : '',
+                inventory_policy: index === 0 ? 'deny' : '',
+                fulfillment_service: index === 0 ? 'manual' : '',
+                unknown: '',
             })
         })
     })
